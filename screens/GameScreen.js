@@ -14,6 +14,7 @@ export default function GameScreen({ startGame }) {
   const [guess, setGuess] = useState("");
   const [timer, setTimer] = useState(60);
   const [attempts, setAttempts] = useState(4);
+  const [hintUsed, setHintUsed] = useState(false);
   const [gameState, setGameState] = useState("guessing"); // 'guessing', 'success','guessAgain', 'gameOver'
   console.log("number: ", number);
 
@@ -58,6 +59,10 @@ export default function GameScreen({ startGame }) {
     setGameState("gameOver");
   };
 
+  const handleUseHint = () => {
+    hintUsed ? Alert.alert("Hint already used") : setHintUsed(true);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
@@ -73,9 +78,17 @@ export default function GameScreen({ startGame }) {
             onChangeText={setGuess}
             keyboardType="numeric"
           ></TextInput>
+          {hintUsed && (
+            <Text style={styles.textStyle}>
+              Hint:
+              {number < 50
+                ? " the number is between 1 and 50"
+                : " the number is between 50 and 100"}
+            </Text>
+          )}
           <Text style={styles.textStyle}>Attempts left: {attempts}</Text>
           <Text style={styles.textStyle}>Timer: {timer}s</Text>
-          <Button title="Use a hint" onPress={console.log("")}></Button>
+          <Button title="Use a hint" onPress={handleUseHint}></Button>
           <Button title="Submit guess" onPress={handleGuess}></Button>
         </View>
       )}
