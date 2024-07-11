@@ -60,14 +60,16 @@ export default function StartScreen() {
           <Button
             title="Reset"
             onPress={() => {
-              console.log("StartScreen 19");
+              console.log("StartScreen 63");
             }}
             color={"darkred"}
           ></Button>
           <Button
             title="Start"
             onPress={() => {
-              console.log("StartScreen 25");
+              //   console.log("StartScreen 25");
+              validateName();
+              validateEmail();
             }}
             color={"ivory"}
           ></Button>
@@ -102,6 +104,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderColor: "blue",
     borderBottomWidth: 1,
+    color: "blue",
     // marginBottom: 30,
     // width: "100%",
     // padding: 5,
