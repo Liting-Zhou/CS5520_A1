@@ -3,11 +3,13 @@ import { StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
 import StartScreen from "./screens/StartScreen";
 import ConfirmScreen from "./screens/ConfirmScreen";
+import GameScreen from "./screens/GameScreen";
 
 export default function App() {
   const [name, setName] = useState("Test User");
   const [email, setEmail] = useState("test@example.com");
   const [confirmVisible, setConfirmVisible] = useState(false);
+  const [gameStarted, setGameStarted] = useState(false);
 
   const handleStart = () => {
     setConfirmVisible(true);
@@ -22,22 +24,31 @@ export default function App() {
   const handleConfirmVisible = () => {
     setConfirmVisible(false);
   };
+  const startGame = () => {
+    setGameStarted(true);
+  };
 
   return (
     <View style={styles.container}>
-      <StartScreen
-        startHandler={handleStart}
-        userName={name}
-        updateUserName={updateUserName}
-        userEmail={email}
-        updateUserEmail={updateUserEmail}
-      />
-      <ConfirmScreen
-        isConfirmVisible={confirmVisible}
-        handleConfirmVisible={handleConfirmVisible}
-        userName={name}
-        userEmail={email}
-      />
+      {!gameStarted && (
+        <StartScreen
+          startHandler={handleStart}
+          userName={name}
+          updateUserName={updateUserName}
+          userEmail={email}
+          updateUserEmail={updateUserEmail}
+        />
+      )}
+      {!gameStarted && (
+        <ConfirmScreen
+          isConfirmVisible={confirmVisible}
+          handleConfirmVisible={handleConfirmVisible}
+          userName={name}
+          userEmail={email}
+          startGame={startGame}
+        />
+      )}
+      {gameStarted && <GameScreen startGame={startGame} />}
     </View>
   );
 }

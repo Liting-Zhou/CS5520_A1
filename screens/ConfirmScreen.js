@@ -6,10 +6,11 @@ export default function ConfirmScreen({
   handleConfirmVisible,
   userName,
   userEmail,
+  startGame,
 }) {
-  const handleGoBack = () => {
-    handleConfirmVisible();
-  };
+  // const handleGoBack = () => {
+  //   handleConfirmVisible();
+  // };
   return (
     <Modal transparent={true} animationType="slide" visible={isConfirmVisible}>
       <View style={styles.container}>
@@ -25,16 +26,12 @@ export default function ConfirmScreen({
           <View style={styles.buttonContainer}>
             <Button
               title="Go back"
-              onPress={() => {
-                handleGoBack();
-              }}
+              onPress={handleConfirmVisible}
               color={"darkred"}
             ></Button>
             <Button
               title="Continue"
-              // onPress={() => {
-              //   handleContinue();
-              // }}
+              onPress={startGame}
               color={"dodgerblue"}
             ></Button>
           </View>
