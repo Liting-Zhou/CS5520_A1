@@ -7,16 +7,27 @@ import {
   Alert,
   Image,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function GameScreen({ startGame }) {
   const [number, setNumber] = useState(Math.floor(Math.random() * 101));
   const [guess, setGuess] = useState("");
-  const [timer, setTimer] = useState(60);
+  const [timer, setTimer] = useState(10);
   const [attempts, setAttempts] = useState(4);
   const [hintUsed, setHintUsed] = useState(false);
   const [gameState, setGameState] = useState("guessing"); // 'guessing', 'success','guessAgain', 'gameOver'
   console.log("number: ", number);
+
+  useEffect(() => {
+    if (timer > 0) {
+      const interval = setInterval(() => {
+        setTimer((currentTimer) => currentTimer - 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    } else {
+      setGameState("gameOver");
+    }
+  }, [timer]);
 
   const handleRestart = () => {
     setNumber(Math.floor(Math.random() * 101)); //todo, maybe set to NaN
@@ -119,6 +130,9 @@ export default function GameScreen({ startGame }) {
           />
           {attempts === 0 && (
             <Text style={styles.textStyle}>You are out of attempts</Text>
+          )}
+          {timer === 0 && (
+            <Text style={styles.textStyle}>You are out of time</Text>
           )}
           <Button title="New Game" onPress={handleNewGame}></Button>
         </View>
