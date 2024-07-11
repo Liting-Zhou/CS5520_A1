@@ -4,13 +4,22 @@ import CheckBox from "@react-native-community/checkbox";
 
 export default function StartScreen() {
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const validateName = () => {
     if (!name || name.length <= 1) {
       console.log("Name must be more than 1 character");
     } else if (/\d/.test(name)) {
+      //if name contains digits
       console.log("Name must be non-numeric");
     }
   };
+  const validateEmail = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRegex.test(email)) {
+      console.log("Please enter a valid email.");
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text>Welcome</Text>
@@ -24,7 +33,12 @@ export default function StartScreen() {
             onBlur={validateName}
           ></TextInput>
           <Text>Email address</Text>
-          <TextInput style={styles.textInputStyle}></TextInput>
+          <TextInput
+            style={styles.textInputStyle}
+            value={email}
+            onChangeText={setEmail}
+            onBlur={validateEmail}
+          ></TextInput>
         </View>
         <View style={styles.robotContainer}>
           <CheckBox disabled={false} />
