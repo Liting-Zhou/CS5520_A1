@@ -16,9 +16,12 @@ export default function GameScreen({ startGame }) {
   const [attempts, setAttempts] = useState(4);
   const [gameState, setGameState] = useState("guessing"); // 'guessing', 'success','guessAgain', 'gameOver'
   console.log("number: ", number);
+
   const handleRestart = () => {
     setNumber(Math.floor(Math.random() * 101)); //todo, maybe set to NaN
     startGame(false);
+    setAttempts(4);
+    setTimer(60);
   };
   const handleGuess = () => {
     const guessedNumber = parseInt(guess);
@@ -31,6 +34,7 @@ export default function GameScreen({ startGame }) {
     if (guessedNumber === number) {
       setGameState("success");
     } else {
+      console.log("attempts: ", attempts);
       if (attempts - 1 === 0) {
         setGameState("gameOver");
       } else {
@@ -48,6 +52,10 @@ export default function GameScreen({ startGame }) {
   const handleTryAgain = () => {
     setGuess("");
     setGameState("guessing");
+  };
+
+  const handleEndGame = () => {
+    setGameState("gameOver");
   };
 
   return (
@@ -81,11 +89,25 @@ export default function GameScreen({ startGame }) {
           <Button title="New Game" onPress={handleNewGame}></Button>
         </View>
       )}
+
       {gameState === "guessAgain" && (
         <View style={styles.card}>
           <Text style={styles.textStyle}>You did not guess correct!</Text>
           <Button title="Try Again" onPress={handleTryAgain}></Button>
-          <Button title="End the game" onPress={console.log("")}></Button>
+          <Button title="End the game" onPress={handleEndGame}></Button>
+        </View>
+      )}
+      {gameState === "gameOver" && (
+        <View style={styles.card}>
+          <Text style={styles.textStyle}>The game is over!</Text>
+          <Image
+            source={require("../assets/crying-face.png")}
+            style={styles.imageStyle}
+          />
+          {attempts === 0 && (
+            <Text style={styles.textStyle}>You are out of attempts</Text>
+          )}
+          <Button title="New Game" onPress={handleNewGame}></Button>
         </View>
       )}
     </View>
@@ -126,5 +148,9 @@ const styles = StyleSheet.create({
     color: "blue",
     padding: 10,
     marginBottom: 30,
+  },
+  imageStyle: {
+    width: 100,
+    height: 100,
   },
 });
