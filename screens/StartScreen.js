@@ -82,7 +82,8 @@ export default function StartScreen() {
               validateName();
               validateEmail();
             }}
-            color={"ivory"}
+            disabled={toggleCheckBox === false}
+            color={"dodgerblue"}
           ></Button>
         </View>
       </View>
@@ -93,13 +94,13 @@ export default function StartScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "cadetblue",
+    backgroundColor: "skyblue",
     alignItems: "center",
     justifyContent: "center",
     // width: "60%",
   },
   card: {
-    backgroundColor: "lightgray",
+    backgroundColor: "papayawhip",
     flex: 0.5,
     padding: 10,
     borderRadius: 5,
