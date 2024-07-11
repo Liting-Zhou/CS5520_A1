@@ -5,18 +5,24 @@ import CheckBox from "@react-native-community/checkbox";
 export default function StartScreen() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [errorMessageName, setErrorMessageName] = useState("");
+  const [errorMessageEmail, setErrorMessageEmail] = useState("");
   const validateName = () => {
     if (!name || name.length <= 1) {
-      console.log("Name must be more than 1 character");
+      setErrorMessageName("Name must be more than 1 character");
     } else if (/\d/.test(name)) {
       //if name contains digits
-      console.log("Name must be non-numeric");
+      setErrorMessageName("Name must be non-numeric");
+    } else {
+      setErrorMessageName("");
     }
   };
   const validateEmail = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email || !emailRegex.test(email)) {
-      console.log("Please enter a valid email.");
+      setErrorMessageEmail("Invalid email address");
+    } else {
+      setErrorMessageEmail("");
     }
   };
 
@@ -32,17 +38,23 @@ export default function StartScreen() {
             onChangeText={setName}
             onBlur={validateName}
           ></TextInput>
-          <Text>Email address</Text>
+          {errorMessageName && (
+            <Text style={styles.errorMessage}>{errorMessageName}</Text>
+          )}
+          <Text style={styles.textStyle}>Email address</Text>
           <TextInput
             style={styles.textInputStyle}
             value={email}
             onChangeText={setEmail}
             onBlur={validateEmail}
           ></TextInput>
+          {errorMessageEmail && (
+            <Text style={styles.errorMessage}>{errorMessageEmail}</Text>
+          )}
         </View>
         <View style={styles.robotContainer}>
           <CheckBox disabled={false} />
-          <Text>I am not a robot</Text>
+          <Text style={styles.textStyleRobot}>I am not a robot</Text>
         </View>
         <View style={styles.buttonContainer}>
           <Button
@@ -80,11 +92,17 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     width: "70%",
   },
+  textStyle: {
+    marginTop: 30,
+  },
+  textStyleRobot: {
+    padding: 10,
+  },
   textInputStyle: {
     height: 40,
     borderColor: "blue",
     borderBottomWidth: 1,
-    marginBottom: 30,
+    // marginBottom: 30,
     // width: "100%",
     // padding: 5,
   },
@@ -99,10 +117,16 @@ const styles = StyleSheet.create({
     padding: 10,
     // justifyContent: "center",
   },
+
   buttonContainer: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-around",
     padding: 10,
+  },
+  errorMessage: {
+    color: "darkred",
+    fontSize: 12,
+    padding: 2,
   },
 });
