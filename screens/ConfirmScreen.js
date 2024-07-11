@@ -31,7 +31,7 @@ export default function ConfirmScreen({
             ></Button>
             <Button
               title="Continue"
-              onPress={startGame}
+              onPress={() => startGame(true)}
               color={"dodgerblue"}
             ></Button>
           </View>

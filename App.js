@@ -24,8 +24,11 @@ export default function App() {
   const handleConfirmVisible = () => {
     setConfirmVisible(false);
   };
-  const startGame = () => {
-    setGameStarted(true);
+  const startGame = (data) => {
+    setGameStarted(data);
+    setConfirmVisible(false);
+    setName("");
+    setEmail("");
   };
 
   return (
