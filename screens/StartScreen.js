@@ -1,15 +1,28 @@
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import CheckBox from "@react-native-community/checkbox";
 
 export default function StartScreen() {
+  const [name, setName] = useState("");
+  const validateName = () => {
+    if (!name || name.length <= 1) {
+      console.log("Name must be more than 1 character");
+    } else if (/\d/.test(name)) {
+      console.log("Name must be non-numeric");
+    }
+  };
   return (
     <View style={styles.container}>
       <Text>Welcome</Text>
       <View style={styles.card}>
         <View style={styles.topContainer}>
           <Text>Name</Text>
-          <TextInput style={styles.textInputStyle}></TextInput>
+          <TextInput
+            style={styles.textInputStyle}
+            value={name}
+            onChangeText={setName}
+            onBlur={validateName}
+          ></TextInput>
           <Text>Email address</Text>
           <TextInput style={styles.textInputStyle}></TextInput>
         </View>
