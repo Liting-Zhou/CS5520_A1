@@ -14,7 +14,7 @@ export default function GameScreen({ startGame }) {
   const [guess, setGuess] = useState("");
   const [timer, setTimer] = useState(60);
   const [attempts, setAttempts] = useState(4);
-  const [gameState, setGameState] = useState("guessing"); // 'guessing', 'success', 'gameOver'
+  const [gameState, setGameState] = useState("guessing"); // 'guessing', 'success','guessAgain', 'gameOver'
   console.log("number: ", number);
   const handleRestart = () => {
     setNumber(Math.floor(Math.random() * 101)); //todo, maybe set to NaN
@@ -34,7 +34,7 @@ export default function GameScreen({ startGame }) {
       if (attempts - 1 === 0) {
         setGameState("gameOver");
       } else {
-        setGameState("guessing");
+        setGameState("guessAgain");
       }
     }
   };
@@ -43,6 +43,10 @@ export default function GameScreen({ startGame }) {
     setGuess("");
     setTimer(60);
     setAttempts(4);
+    setGameState("guessing");
+  };
+  const handleTryAgain = () => {
+    setGuess("");
     setGameState("guessing");
   };
 
@@ -75,6 +79,13 @@ export default function GameScreen({ startGame }) {
             source={{ uri: `https://picsum.photos/id/${number}/100/100` }}
           />
           <Button title="New Game" onPress={handleNewGame}></Button>
+        </View>
+      )}
+      {gameState === "guessAgain" && (
+        <View style={styles.card}>
+          <Text style={styles.textStyle}>You did not guess correct!</Text>
+          <Button title="Try Again" onPress={handleTryAgain}></Button>
+          <Button title="End the game" onPress={console.log("")}></Button>
         </View>
       )}
     </View>
