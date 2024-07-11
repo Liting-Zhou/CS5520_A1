@@ -1,8 +1,9 @@
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 import React, { useState } from "react";
-import CheckBox from "@react-native-community/checkbox";
+// import CheckBox from "@react-native-community/checkbox";
+import Checkbox from "expo-checkbox";
 
-export default function StartScreen() {
+export default function StartScreen({ startHandler }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [errorMessageName, setErrorMessageName] = useState("");
@@ -18,6 +19,12 @@ export default function StartScreen() {
       setErrorMessageName("");
     }
   };
+  const validateNameAsync = () => {
+    return new Promise((resolve) => {
+      validateName();
+      resolve();
+    });
+  };
   const validateEmail = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email || !emailRegex.test(email)) {
@@ -26,12 +33,28 @@ export default function StartScreen() {
       setErrorMessageEmail("");
     }
   };
+  const validateEmailAsync = () => {
+    return new Promise((resolve) => {
+      validateEmail();
+      resolve();
+    });
+  };
   const handleReset = () => {
+    console.log("Reset button pressed");
     setName("");
     setEmail("");
     setErrorMessageName("");
     setErrorMessageEmail("");
     setToggleCheckBox(false);
+  };
+  const handleStart = async () => {
+    await validateNameAsync();
+    await validateEmailAsync();
+    //if there are no errors, show the confirm screen
+    if (!errorMessageName && !errorMessageEmail && toggleCheckBox) {
+      // console.log("Start button pressed");
+      startHandler();
+    }
   };
 
   return (
@@ -61,10 +84,7 @@ export default function StartScreen() {
           )}
         </View>
         <View style={styles.robotContainer}>
-          <CheckBox
-            value={toggleCheckBox}
-            onValueChange={(newValue) => setToggleCheckBox(newValue)}
-          />
+          <Checkbox value={toggleCheckBox} onValueChange={setToggleCheckBox} />
           <Text style={styles.textStyleRobot}>I am not a robot</Text>
         </View>
         <View style={styles.buttonContainer}>
@@ -78,9 +98,7 @@ export default function StartScreen() {
           <Button
             title="Start"
             onPress={() => {
-              //   console.log("StartScreen 25");
-              validateName();
-              validateEmail();
+              handleStart();
             }}
             disabled={toggleCheckBox === false}
             color={"dodgerblue"}
