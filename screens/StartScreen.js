@@ -7,6 +7,7 @@ export default function StartScreen() {
   const [email, setEmail] = useState("");
   const [errorMessageName, setErrorMessageName] = useState("");
   const [errorMessageEmail, setErrorMessageEmail] = useState("");
+  const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const validateName = () => {
     if (!name || name.length <= 1) {
       setErrorMessageName("Name must be more than 1 character");
@@ -24,6 +25,13 @@ export default function StartScreen() {
     } else {
       setErrorMessageEmail("");
     }
+  };
+  const handleReset = () => {
+    setName("");
+    setEmail("");
+    setErrorMessageName("");
+    setErrorMessageEmail("");
+    setToggleCheckBox(false);
   };
 
   return (
@@ -53,14 +61,17 @@ export default function StartScreen() {
           )}
         </View>
         <View style={styles.robotContainer}>
-          <CheckBox disabled={false} />
+          <CheckBox
+            value={toggleCheckBox}
+            onValueChange={(newValue) => setToggleCheckBox(newValue)}
+          />
           <Text style={styles.textStyleRobot}>I am not a robot</Text>
         </View>
         <View style={styles.buttonContainer}>
           <Button
             title="Reset"
             onPress={() => {
-              console.log("StartScreen 63");
+              handleReset();
             }}
             color={"darkred"}
           ></Button>
@@ -82,13 +93,13 @@ export default function StartScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "lightblue",
+    backgroundColor: "cadetblue",
     alignItems: "center",
     justifyContent: "center",
     // width: "60%",
   },
   card: {
-    backgroundColor: "grey",
+    backgroundColor: "lightgray",
     flex: 0.5,
     padding: 10,
     borderRadius: 5,
