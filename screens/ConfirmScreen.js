@@ -1,18 +1,43 @@
-import { StyleSheet, Text, View, Modal } from "react-native";
+import { StyleSheet, Text, View, Modal, Button } from "react-native";
 import React, { useState } from "react";
 
-export default function ConfirmScreen({ isConfirmVisible, userName }) {
+export default function ConfirmScreen({
+  isConfirmVisible,
+  handleConfirmVisible,
+  userName,
+  userEmail,
+}) {
+  const handleGoBack = () => {
+    handleConfirmVisible();
+  };
   return (
     <Modal transparent={true} animationType="slide" visible={isConfirmVisible}>
       <View style={styles.container}>
         <View style={styles.card}>
-          <Text>
+          <Text style={styles.textStyle}>
             Hello {userName}
             {"\n"}
             Here is the email that you entered:{"\n"}
-            {"\n"}
+            {userEmail}
+            {"\n"} {"\n"}
             If it is not correct, please go back and enter again.
           </Text>
+          <View style={styles.buttonContainer}>
+            <Button
+              title="Go back"
+              onPress={() => {
+                handleGoBack();
+              }}
+              color={"darkred"}
+            ></Button>
+            <Button
+              title="Continue"
+              // onPress={() => {
+              //   handleContinue();
+              // }}
+              color={"dodgerblue"}
+            ></Button>
+          </View>
         </View>
       </View>
     </Modal>
@@ -32,5 +57,15 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     width: "80%",
+  },
+  textStyle: {
+    padding: 10,
+    lineHeight: 20,
+  },
+  buttonContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    padding: 10,
   },
 });

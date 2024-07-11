@@ -5,17 +5,22 @@ import StartScreen from "./screens/StartScreen";
 import ConfirmScreen from "./screens/ConfirmScreen";
 
 export default function App() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState("Test User");
+  const [email, setEmail] = useState("test@example.com");
   const [confirmVisible, setConfirmVisible] = useState(false);
 
   const handleStart = () => {
     setConfirmVisible(true);
-    console.log("App 11: Start button pressed");
     console.log("confirmVisible: ", confirmVisible);
   };
   const updateUserName = (name) => {
     setName(name);
+  };
+  const updateUserEmail = (email) => {
+    setEmail(email);
+  };
+  const handleConfirmVisible = () => {
+    setConfirmVisible(false);
   };
 
   return (
@@ -24,8 +29,15 @@ export default function App() {
         startHandler={handleStart}
         userName={name}
         updateUserName={updateUserName}
+        userEmail={email}
+        updateUserEmail={updateUserEmail}
       />
-      <ConfirmScreen isConfirmVisible={confirmVisible} userName={name} />
+      <ConfirmScreen
+        isConfirmVisible={confirmVisible}
+        handleConfirmVisible={handleConfirmVisible}
+        userName={name}
+        userEmail={email}
+      />
     </View>
   );
 }

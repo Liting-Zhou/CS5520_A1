@@ -1,74 +1,56 @@
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 import React, { useState } from "react";
-// import CheckBox from "@react-native-community/checkbox";
 import Checkbox from "expo-checkbox";
 
 export default function StartScreen({
   startHandler,
   userName,
   updateUserName,
+  userEmail,
+  updateUserEmail,
 }) {
-  // const [name, setName] = useState("");
-  const [email, setEmail] = useState("a@2.co");
   const [errorMessageName, setErrorMessageName] = useState("");
   const [errorMessageEmail, setErrorMessageEmail] = useState("");
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  // const validateName = () => {
-  //   if (!name || name.length <= 1) {
-  //     setErrorMessageName("Name must be more than 1 character");
-  //   } else if (/\d/.test(name)) {
-  //     //if name contains digits
-  //     setErrorMessageName("Name must be non-numeric");
-  //   } else {
-  //     setErrorMessageName("");
-  //   }
-  // };
+
   const validateName = () => {
+    console.log("validateName: ", userName);
     if (!userName || userName.length <= 1) {
       setErrorMessageName("Name must be more than 1 character");
+      return false;
     } else if (/\d/.test(userName)) {
       //if name contains digits
       setErrorMessageName("Name must be non-numeric");
+      return false;
     } else {
       setErrorMessageName("");
+      return true;
     }
   };
-  const validateNameAsync = () => {
-    return new Promise((resolve) => {
-      validateName();
-      resolve();
-    });
-  };
+
   const validateEmail = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email || !emailRegex.test(email)) {
+    if (!userEmail || !emailRegex.test(userEmail)) {
       setErrorMessageEmail("Invalid email address");
+      return false;
     } else {
       setErrorMessageEmail("");
+      return true;
     }
   };
-  const validateEmailAsync = () => {
-    return new Promise((resolve) => {
-      validateEmail();
-      resolve();
-    });
-  };
+
   const handleReset = () => {
-    console.log("Reset button pressed");
-    // setName("");
     updateUserName("");
-    setEmail("");
+    updateUserEmail("");
     setErrorMessageName("");
     setErrorMessageEmail("");
     setToggleCheckBox(false);
   };
-  const handleStart = async () => {
-    //make sure errorMessageName and errorMessageEmail are updated before proceeding
-    await validateNameAsync();
-    await validateEmailAsync();
+  const handleStart = () => {
+    const nameValid = validateName();
+    const emailValid = validateEmail();
     //if there are no errors, show the confirm screen
-    if (!errorMessageName && !errorMessageEmail && toggleCheckBox) {
-      // console.log("Start button pressed");
+    if (nameValid && emailValid && toggleCheckBox) {
       startHandler();
     }
   };
@@ -91,8 +73,8 @@ export default function StartScreen({
           <Text style={styles.textStyle}>Email address</Text>
           <TextInput
             style={styles.textInputStyle}
-            value={email}
-            onChangeText={setEmail}
+            value={userEmail}
+            onChangeText={updateUserEmail}
             onBlur={validateEmail}
           ></TextInput>
           {errorMessageEmail && (
