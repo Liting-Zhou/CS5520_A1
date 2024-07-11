@@ -1,12 +1,18 @@
 import { StyleSheet, Text, View, Modal } from "react-native";
 import React, { useState } from "react";
 
-export default function ConfirmScreen({ isConfirmVisible }) {
+export default function ConfirmScreen({ isConfirmVisible, userName }) {
   return (
     <Modal transparent={true} animationType="slide" visible={isConfirmVisible}>
       <View style={styles.container}>
         <View style={styles.card}>
-          <Text>ConfirmScreen</Text>
+          <Text>
+            Hello {userName}
+            {"\n"}
+            Here is the email that you entered:{"\n"}
+            {"\n"}
+            If it is not correct, please go back and enter again.
+          </Text>
         </View>
       </View>
     </Modal>
@@ -16,7 +22,7 @@ export default function ConfirmScreen({ isConfirmVisible }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: "grey",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -25,6 +31,6 @@ const styles = StyleSheet.create({
     flex: 0.3,
     padding: 10,
     borderRadius: 5,
-    width: "70%",
+    width: "80%",
   },
 });

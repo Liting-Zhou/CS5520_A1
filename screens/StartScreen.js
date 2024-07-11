@@ -3,16 +3,30 @@ import React, { useState } from "react";
 // import CheckBox from "@react-native-community/checkbox";
 import Checkbox from "expo-checkbox";
 
-export default function StartScreen({ startHandler }) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+export default function StartScreen({
+  startHandler,
+  userName,
+  updateUserName,
+}) {
+  // const [name, setName] = useState("");
+  const [email, setEmail] = useState("a@2.co");
   const [errorMessageName, setErrorMessageName] = useState("");
   const [errorMessageEmail, setErrorMessageEmail] = useState("");
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
+  // const validateName = () => {
+  //   if (!name || name.length <= 1) {
+  //     setErrorMessageName("Name must be more than 1 character");
+  //   } else if (/\d/.test(name)) {
+  //     //if name contains digits
+  //     setErrorMessageName("Name must be non-numeric");
+  //   } else {
+  //     setErrorMessageName("");
+  //   }
+  // };
   const validateName = () => {
-    if (!name || name.length <= 1) {
+    if (!userName || userName.length <= 1) {
       setErrorMessageName("Name must be more than 1 character");
-    } else if (/\d/.test(name)) {
+    } else if (/\d/.test(userName)) {
       //if name contains digits
       setErrorMessageName("Name must be non-numeric");
     } else {
@@ -41,13 +55,15 @@ export default function StartScreen({ startHandler }) {
   };
   const handleReset = () => {
     console.log("Reset button pressed");
-    setName("");
+    // setName("");
+    updateUserName("");
     setEmail("");
     setErrorMessageName("");
     setErrorMessageEmail("");
     setToggleCheckBox(false);
   };
   const handleStart = async () => {
+    //make sure errorMessageName and errorMessageEmail are updated before proceeding
     await validateNameAsync();
     await validateEmailAsync();
     //if there are no errors, show the confirm screen
@@ -65,8 +81,8 @@ export default function StartScreen({ startHandler }) {
           <Text>Name</Text>
           <TextInput
             style={styles.textInputStyle}
-            value={name}
-            onChangeText={setName}
+            value={userName}
+            onChangeText={updateUserName}
             onBlur={validateName}
           ></TextInput>
           {errorMessageName && (
