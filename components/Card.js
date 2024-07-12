@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     // shadow for different platforms
     ...Platform.select({
       ios: {
-        shadowColor: colors.shadow, //todo: find a better color for shadow
+        shadowColor: colors.shadow,
         shadowOffset: { width: 0, height: 5 },
         shadowOpacity: 0.8,
         shadowRadius: 10,
