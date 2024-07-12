@@ -31,7 +31,7 @@ export default function GameScreen({ startGame }) {
     setNumber(Math.floor(Math.random() * 101));
     startGame(false);
     setAttempts(4);
-    setTimer(60);
+    setTimer(30);
   };
   const handleGuess = () => {
     const guessedNumber = parseInt(guess);
@@ -92,8 +92,9 @@ export default function GameScreen({ startGame }) {
           <Input
             value={guess}
             onChangeText={setGuess}
-            keyboardType="numeric"
+            // keyboardType="numeric"
             inputStyle={styles.textInputStyle}
+            // onBlur={() => Keyboard.dismiss()}
           />
           {hintUsed && (
             // <Text style={styles.hintStyle}>
@@ -168,7 +169,7 @@ const styles = StyleSheet.create({
 
   card: {
     width: "80%",
-    minHeight: "20%",
+    minHeight: "10%",
     alignItems: "center",
   },
   buttonContainer: {

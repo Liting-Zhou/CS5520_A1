@@ -134,10 +134,8 @@ const styles = StyleSheet.create({
   },
   nameTextStyle: {
     padding: 0,
-    marginTop: 5,
   },
   emailTextStyle: {
-    marginTop: 30,
     padding: 0,
   },
   textStyleRobot: {
@@ -146,6 +144,7 @@ const styles = StyleSheet.create({
   topContainer: {
     flex: 4,
     padding: 10,
+    justifyContent: "space-evenly",
   },
   robotContainer: {
     flex: 1,

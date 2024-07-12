@@ -9,16 +9,14 @@ export default function Card({ children, style }) {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: colors.cardBackGround,
-    // flex: 0.5,
     padding: 10,
     borderRadius: 5,
-    // width: "70%",
-    // for iOS
-    shadowColor: colors.shadow,
-    shadowOffset: { width: 0, height: 2 },
+    // shadow for iOS
+    shadowColor: colors.shadow, //todo: find a better color for shadow
+    shadowOffset: { width: 0, height: 5 },
     shadowOpacity: 0.8,
-    shadowRadius: 2,
-    // for Android
+    shadowRadius: 10,
+    // shadow for Android
     elevation: 5,
   },
 });

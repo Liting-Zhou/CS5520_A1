@@ -14,7 +14,6 @@ export default function Input({
       value={value}
       onChangeText={onChangeText}
       style={[styles.textInputStyle, inputStyle]}
-      keyboardType={keyboardType}
       onBlur={onBlur}
     ></TextInput>
   );
