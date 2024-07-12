@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 import React, { useState } from "react";
 import Checkbox from "expo-checkbox";
 import { LinearGradient } from "expo-linear-gradient";
+import colors from "../colors";
 
 export default function StartScreen({
   startHandler,
@@ -59,7 +60,11 @@ export default function StartScreen({
   return (
     <View style={styles.container}>
       <LinearGradient
-        colors={["powderblue", "deepskyblue", "navy"]}
+        colors={[
+          colors.backGroundOne,
+          colors.backGroundTwo,
+          colors.backGroundThree,
+        ]}
         style={styles.background}
         start={{ x: 0, y: 0 }}
         end={{ x: 0, y: 1 }}
@@ -98,7 +103,7 @@ export default function StartScreen({
             onPress={() => {
               handleReset();
             }}
-            color={"darkred"}
+            color={colors.darkRed}
           ></Button>
           <Button
             title="Start"
@@ -106,7 +111,7 @@ export default function StartScreen({
               handleStart();
             }}
             disabled={toggleCheckBox === false}
-            color={"dodgerblue"}
+            color={colors.buttonNormal}
           ></Button>
         </View>
       </View>
@@ -117,10 +122,8 @@ export default function StartScreen({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: "skyblue",
     alignItems: "center",
     justifyContent: "center",
-    // width: "60%",
   },
   background: {
     position: "absolute",
@@ -130,7 +133,7 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   card: {
-    backgroundColor: "papayawhip",
+    backgroundColor: colors.cardBackGround,
     flex: 0.5,
     padding: 10,
     borderRadius: 5,
@@ -141,7 +144,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     padding: 10,
     marginBottom: 30,
-    color: "blue",
+    color: colors.blue,
   },
   textStyle: {
     marginTop: 30,
@@ -151,9 +154,9 @@ const styles = StyleSheet.create({
   },
   textInputStyle: {
     height: 40,
-    borderColor: "blue",
+    borderColor: colors.blue,
     borderBottomWidth: 1,
-    color: "blue",
+    color: colors.blue,
   },
   topContainer: {
     flex: 3,
@@ -164,7 +167,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     padding: 10,
-    // justifyContent: "center",
   },
 
   buttonContainer: {
@@ -174,7 +176,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   errorMessage: {
-    color: "darkred",
+    color: colors.darkRed,
     fontSize: 12,
     padding: 2,
   },

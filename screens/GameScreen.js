@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { LinearGradient } from "expo-linear-gradient";
+import colors from "../colors";
 
 export default function GameScreen({ startGame }) {
   const [number, setNumber] = useState(Math.floor(Math.random() * 101));
@@ -79,13 +80,21 @@ export default function GameScreen({ startGame }) {
   return (
     <View style={styles.container}>
       <LinearGradient
-        colors={["powderblue", "deepskyblue", "navy"]}
+        colors={[
+          colors.backGroundOne,
+          colors.backGroundTwo,
+          colors.backGroundThree,
+        ]}
         style={styles.background}
         start={{ x: 0, y: 0 }}
         end={{ x: 0, y: 1 }}
       />
       <View style={styles.buttonContainer}>
-        <Button title="Restart" onPress={handleRestart}></Button>
+        <Button
+          title="Restart"
+          onPress={handleRestart}
+          color={colors.buttonNormal}
+        ></Button>
       </View>
 
       {gameState === "guessing" && (
@@ -111,8 +120,13 @@ export default function GameScreen({ startGame }) {
             title="Use a hint"
             onPress={handleUseHint}
             disabled={hintUsed}
+            color={colors.buttonNormal}
           ></Button>
-          <Button title="Submit guess" onPress={handleGuess}></Button>
+          <Button
+            title="Submit guess"
+            onPress={handleGuess}
+            color={colors.buttonNormal}
+          ></Button>
         </View>
       )}
       {gameState === "success" && (
@@ -124,15 +138,27 @@ export default function GameScreen({ startGame }) {
             style={styles.imageStyle}
             alt="image from picsum.photos"
           />
-          <Button title="New Game" onPress={handleNewGame}></Button>
+          <Button
+            title="New Game"
+            onPress={handleNewGame}
+            color={colors.buttonNormal}
+          ></Button>
         </View>
       )}
 
       {gameState === "guessAgain" && (
         <View style={styles.card}>
           <Text style={styles.textStyle}>You did not guess correct!</Text>
-          <Button title="Try Again" onPress={handleTryAgain}></Button>
-          <Button title="End the game" onPress={handleEndGame}></Button>
+          <Button
+            title="Try Again"
+            onPress={handleTryAgain}
+            color={colors.buttonNormal}
+          ></Button>
+          <Button
+            title="End the game"
+            onPress={handleEndGame}
+            color={colors.buttonNormal}
+          ></Button>
         </View>
       )}
       {gameState === "gameOver" && (
@@ -149,7 +175,11 @@ export default function GameScreen({ startGame }) {
           {timer === 0 && (
             <Text style={styles.textStyle}>You are out of time</Text>
           )}
-          <Button title="New Game" onPress={handleNewGame}></Button>
+          <Button
+            title="New Game"
+            onPress={handleNewGame}
+            color={colors.buttonNormal}
+          ></Button>
         </View>
       )}
     </View>
@@ -159,7 +189,6 @@ export default function GameScreen({ startGame }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "skyblue",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -171,7 +200,7 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   card: {
-    backgroundColor: "papayawhip",
+    backgroundColor: colors.cardBackGround,
     padding: 10,
     borderRadius: 5,
     width: "80%",
@@ -180,8 +209,6 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     width: "80%",
-    // flexDirection: "row",
-    // justifyContent: "flex-end",
     alignItems: "flex-end",
     padding: 10,
   },
@@ -190,14 +217,14 @@ const styles = StyleSheet.create({
   },
   hintStyle: {
     padding: 5,
-    color: "blue",
+    color: colors.blue,
   },
   textInputStyle: {
     height: 40,
     width: "20%",
-    borderColor: "blue",
+    borderColor: colors.blue,
     borderBottomWidth: 1,
-    color: "blue",
+    color: colors.blue,
     padding: 10,
     marginBottom: 30,
   },

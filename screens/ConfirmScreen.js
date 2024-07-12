@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Modal, Button } from "react-native";
 import React, { useState } from "react";
+import colors from "../colors";
 
 export default function ConfirmScreen({
   isConfirmVisible,
@@ -26,12 +27,12 @@ export default function ConfirmScreen({
             <Button
               title="Go back"
               onPress={handleConfirmVisible}
-              color={"darkred"}
+              color={colors.darkRed}
             ></Button>
             <Button
               title="Continue"
               onPress={() => startGame(true)}
-              color={"dodgerblue"}
+              color={colors.buttonNormal}
             ></Button>
           </View>
         </View>
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   card: {
-    backgroundColor: "papayawhip",
+    backgroundColor: colors.cardBackGround,
     flex: 0.3,
     padding: 10,
     borderRadius: 5,
@@ -57,7 +58,6 @@ const styles = StyleSheet.create({
   textStyle: {
     padding: 10,
     lineHeight: 20,
-    // color: "blue",
   },
   buttonContainer: {
     flex: 1,
