@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, Modal, Button } from "react-native";
 import React, { useState } from "react";
 import colors from "../colors";
 import Card from "../components/Card";
+import MyButton from "../components/MyButton";
 
 export default function ConfirmScreen({
   isConfirmVisible,
@@ -14,7 +15,6 @@ export default function ConfirmScreen({
     <Modal transparent={true} animationType="slide" visible={isConfirmVisible}>
       <View style={styles.container}>
         <Card style={styles.card}>
-          {/* <View style={styles.card}> */}
           <Text style={styles.textStyle}>
             Hello {userName},{"\n"}
             Here is the email that you entered:{"\n"}
@@ -23,18 +23,13 @@ export default function ConfirmScreen({
             If it is not correct, please go back and enter again.
           </Text>
           <View style={styles.buttonContainer}>
-            <Button
-              title="Go back"
+            <MyButton
+              title={"Go back"}
               onPress={handleConfirmVisible}
               color={colors.darkRed}
-            ></Button>
-            <Button
-              title="Continue"
-              onPress={() => startGame(true)}
-              color={colors.buttonNormal}
-            ></Button>
+            />
+            <MyButton title={"Continue"} onPress={() => startGame(true)} />
           </View>
-          {/* </View> */}
         </Card>
       </View>
     </Modal>

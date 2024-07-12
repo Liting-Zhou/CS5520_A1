@@ -1,16 +1,9 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  TextInput,
-  Alert,
-  Image,
-} from "react-native";
+import { StyleSheet, Text, View, TextInput, Alert, Image } from "react-native";
 import React, { useState, useEffect } from "react";
 import colors from "../colors";
 import GradientBackground from "../components/GradientBackground";
 import Card from "../components/Card";
+import MyButton from "../components/MyButton";
 
 export default function GameScreen({ startGame }) {
   const [number, setNumber] = useState(Math.floor(Math.random() * 101));
@@ -80,27 +73,12 @@ export default function GameScreen({ startGame }) {
 
   return (
     <View style={styles.container}>
-      {/* <LinearGradient
-        colors={[
-          colors.backGroundOne,
-          colors.backGroundTwo,
-          colors.backGroundThree,
-        ]}
-        style={styles.background}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 0, y: 1 }}
-      /> */}
       <GradientBackground />
       <View style={styles.buttonContainer}>
-        <Button
-          title="Restart"
-          onPress={handleRestart}
-          color={colors.buttonNormal}
-        ></Button>
+        <MyButton title={"Restart"} onPress={handleRestart} />
       </View>
 
       {gameState === "guessing" && (
-        // <View style={styles.card}>
         <Card style={styles.card}>
           <Text style={styles.textStyle}>Guess A Number Between 1 & 100</Text>
           <TextInput
@@ -119,22 +97,16 @@ export default function GameScreen({ startGame }) {
           )}
           <Text style={styles.textStyle}>Attempts left: {attempts}</Text>
           <Text style={styles.textStyle}>Timer: {timer}s</Text>
-          <Button
-            title="Use a hint"
+
+          <MyButton
+            title={"Use a hint"}
             onPress={handleUseHint}
             disabled={hintUsed}
-            color={colors.buttonNormal}
-          ></Button>
-          <Button
-            title="Submit guess"
-            onPress={handleGuess}
-            color={colors.buttonNormal}
-          ></Button>
+          />
+          <MyButton title={"Submit guess"} onPress={handleGuess} />
         </Card>
-        // </View>
       )}
       {gameState === "success" && (
-        // <View style={styles.card}>
         <Card style={styles.card}>
           <Text style={styles.textStyle}>You guessed correct!</Text>
           <Text style={styles.textStyle}>Attempts used: {4 - attempts}</Text>
@@ -143,34 +115,20 @@ export default function GameScreen({ startGame }) {
             style={styles.imageStyle}
             alt="image from picsum.photos"
           />
-          <Button
-            title="New Game"
-            onPress={handleNewGame}
-            color={colors.buttonNormal}
-          ></Button>
+          <MyButton title={"New Game"} onPress={handleNewGame} />
         </Card>
-        // </View>
       )}
 
       {gameState === "guessAgain" && (
-        // <View style={styles.card}>
         <Card style={styles.card}>
           <Text style={styles.textStyle}>You did not guess correct!</Text>
-          <Button
-            title="Try Again"
-            onPress={handleTryAgain}
-            color={colors.buttonNormal}
-          ></Button>
-          <Button
-            title="End the game"
-            onPress={handleEndGame}
-            color={colors.buttonNormal}
-          ></Button>
+
+          <MyButton title={"Try Again"} onPress={handleTryAgain} />
+
+          <MyButton title={"End the game"} onPress={handleEndGame} />
         </Card>
-        // </View>
       )}
       {gameState === "gameOver" && (
-        // <View style={styles.card}>
         <Card style={styles.card}>
           <Text style={styles.textStyle}>The game is over!</Text>
           <Image
@@ -184,13 +142,9 @@ export default function GameScreen({ startGame }) {
           {timer === 0 && (
             <Text style={styles.textStyle}>You are out of time</Text>
           )}
-          <Button
-            title="New Game"
-            onPress={handleNewGame}
-            color={colors.buttonNormal}
-          ></Button>
+
+          <MyButton title={"New Game"} onPress={handleNewGame} />
         </Card>
-        // </View>
       )}
     </View>
   );
@@ -202,17 +156,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  // background: {
-  //   position: "absolute",
-  //   left: 0,
-  //   right: 0,
-  //   top: 0,
-  //   bottom: 0,
-  // },
+
   card: {
-    // backgroundColor: colors.cardBackGround,
-    // padding: 10,
-    // borderRadius: 5,
     width: "80%",
     minHeight: "20%",
     alignItems: "center",

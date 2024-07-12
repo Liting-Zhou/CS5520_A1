@@ -4,6 +4,7 @@ import Checkbox from "expo-checkbox";
 import colors from "../colors";
 import GradientBackground from "../components/GradientBackground";
 import Card from "../components/Card";
+import MyButton from "../components/MyButton";
 
 export default function StartScreen({
   startHandler,
@@ -102,21 +103,16 @@ export default function StartScreen({
           <Text style={styles.textStyleRobot}>I am not a robot</Text>
         </View>
         <View style={styles.buttonContainer}>
-          <Button
-            title="Reset"
-            onPress={() => {
-              handleReset();
-            }}
+          <MyButton
+            title={"Reset"}
+            onPress={handleReset}
             color={colors.darkRed}
-          ></Button>
-          <Button
-            title="Start"
-            onPress={() => {
-              handleStart();
-            }}
+          />
+          <MyButton
+            title={"Start"}
+            onPress={handleStart}
             disabled={toggleCheckBox === false}
-            color={colors.buttonNormal}
-          ></Button>
+          />
         </View>
         {/* </View> */}
       </Card>
