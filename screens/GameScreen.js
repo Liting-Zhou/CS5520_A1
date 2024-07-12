@@ -19,12 +19,12 @@ export default function GameScreen({ startGame }) {
   console.log("number: ", number);
 
   useEffect(() => {
-    if (timer > 0) {
+    if (timer > 0 && gameState !== "success" && gameState !== "gameOver") {
       const interval = setInterval(() => {
         setTimer((currentTimer) => currentTimer - 1);
       }, 1000);
       return () => clearInterval(interval);
-    } else {
+    } else if (timer === 0) {
       setGameState("gameOver");
     }
   }, [timer]);
@@ -46,7 +46,7 @@ export default function GameScreen({ startGame }) {
     if (guessedNumber === number) {
       setGameState("success");
     } else {
-      console.log("attempts: ", attempts);
+      console.log("attempts left: ", attempts);
       if (attempts - 1 === 0) {
         setGameState("gameOver");
       } else {
@@ -60,6 +60,7 @@ export default function GameScreen({ startGame }) {
     setTimer(60);
     setAttempts(4);
     setGameState("guessing");
+    setHintUsed(false);
   };
   const handleTryAgain = () => {
     setGuess("");
@@ -113,6 +114,7 @@ export default function GameScreen({ startGame }) {
           <Text style={styles.textStyle}>Attempts used: {4 - attempts}</Text>
           <Image
             source={{ uri: `https://picsum.photos/id/${number}/100/100` }}
+            style={styles.imageStyle}
             alt="image from picsum.photos"
           />
           <Button title="New Game" onPress={handleNewGame}></Button>

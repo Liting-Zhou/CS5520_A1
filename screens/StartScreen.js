@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 import React, { useState } from "react";
 import Checkbox from "expo-checkbox";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function StartScreen({
   startHandler,
@@ -57,7 +58,13 @@ export default function StartScreen({
 
   return (
     <View style={styles.container}>
-      <Text>Welcome</Text>
+      <LinearGradient
+        colors={["powderblue", "deepskyblue", "navy"]}
+        style={styles.background}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0, y: 1 }}
+      />
+      <Text style={styles.welcomeStyle}>Welcome</Text>
       <View style={styles.card}>
         <View style={styles.topContainer}>
           <Text>Name</Text>
@@ -110,10 +117,19 @@ export default function StartScreen({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "skyblue",
+    // backgroundColor: "skyblue",
     alignItems: "center",
     justifyContent: "center",
     // width: "60%",
+  },
+  background: {
+    // flex: 1,
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    // height: "100%",
   },
   card: {
     backgroundColor: "papayawhip",
@@ -121,6 +137,13 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     width: "70%",
+  },
+  welcomeStyle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    padding: 10,
+    marginBottom: 30,
+    color: "blue",
   },
   textStyle: {
     marginTop: 30,
