@@ -5,6 +5,7 @@ import GradientBackground from "../components/GradientBackground";
 import Card from "../components/Card";
 import MyButton from "../components/MyButton";
 import Input from "../components/Input";
+import ContentText from "../components/ContentText";
 
 export default function GameScreen({ startGame }) {
   const [number, setNumber] = useState(Math.floor(Math.random() * 101));
@@ -71,6 +72,11 @@ export default function GameScreen({ startGame }) {
   const handleUseHint = () => {
     hintUsed ? Alert.alert("Hint already used") : setHintUsed(true);
   };
+  const hintText =
+    "Hint: " +
+    (number < 50
+      ? "the number is between 1 and 50"
+      : "the number is between 50 and 100");
 
   return (
     <View style={styles.container}>
@@ -81,13 +87,8 @@ export default function GameScreen({ startGame }) {
 
       {gameState === "guessing" && (
         <Card style={styles.card}>
-          <Text style={styles.textStyle}>Guess A Number Between 1 & 100</Text>
-          {/* <TextInput
-            style={styles.textInputStyle}
-            value={guess}
-            onChangeText={setGuess}
-            keyboardType="numeric"
-          ></TextInput> */}
+          {/* <Text style={styles.textStyle}>Guess A Number Between 1 & 100</Text> */}
+          <ContentText text={"Guess A Number Between 1 & 100"} />
           <Input
             value={guess}
             onChangeText={setGuess}
@@ -95,15 +96,13 @@ export default function GameScreen({ startGame }) {
             inputStyle={styles.textInputStyle}
           />
           {hintUsed && (
-            <Text style={styles.hintStyle}>
-              Hint:
-              {number < 50
-                ? " the number is between 1 and 50"
-                : " the number is between 50 and 100"}
-            </Text>
+            // <Text style={styles.hintStyle}>
+            <ContentText text={hintText} style={styles.hintStyle} />
           )}
-          <Text style={styles.textStyle}>Attempts left: {attempts}</Text>
-          <Text style={styles.textStyle}>Timer: {timer}s</Text>
+          {/* <Text style={styles.textStyle}>Attempts left: {attempts}</Text> */}
+          <ContentText text={"Attempts left: " + attempts} />
+          {/* <Text style={styles.textStyle}>Timer: {timer}s</Text> */}
+          <ContentText text={"Timer: " + timer} />
 
           <MyButton
             title={"Use a hint"}
@@ -115,8 +114,10 @@ export default function GameScreen({ startGame }) {
       )}
       {gameState === "success" && (
         <Card style={styles.card}>
-          <Text style={styles.textStyle}>You guessed correct!</Text>
-          <Text style={styles.textStyle}>Attempts used: {4 - attempts}</Text>
+          {/* <Text style={styles.textStyle}>You guessed correct!</Text> */}
+          <ContentText text={"You guessed correct!"} />
+          {/* <Text style={styles.textStyle}>Attempts used: {4 - attempts}</Text> */}
+          <ContentText text={"Attempts used: " + (4 - attempts)} />
           <Image
             source={{ uri: `https://picsum.photos/id/${number}/100/100` }}
             style={styles.imageStyle}
@@ -128,28 +129,29 @@ export default function GameScreen({ startGame }) {
 
       {gameState === "guessAgain" && (
         <Card style={styles.card}>
-          <Text style={styles.textStyle}>You did not guess correct!</Text>
-
+          {/* <Text style={styles.textStyle}>You did not guess correct!</Text> */}
+          <ContentText text={"You did not guess correct!"} />
           <MyButton title={"Try Again"} onPress={handleTryAgain} />
-
           <MyButton title={"End the game"} onPress={handleEndGame} />
         </Card>
       )}
       {gameState === "gameOver" && (
         <Card style={styles.card}>
-          <Text style={styles.textStyle}>The game is over!</Text>
+          {/* <Text style={styles.textStyle}>The game is over!</Text> */}
+          <ContentText text={"The game is over!"} />
           <Image
             source={require("../assets/crying-face.png")}
             style={styles.imageStyle}
             alt="crying face emoji"
           />
           {attempts === 0 && (
-            <Text style={styles.textStyle}>You are out of attempts</Text>
+            // <Text style={styles.textStyle}>You are out of attempts</Text>
+            <ContentText text={"You are out of attempts"} />
           )}
           {timer === 0 && (
-            <Text style={styles.textStyle}>You are out of time</Text>
+            // <Text style={styles.textStyle}>You are out of time</Text>
+            <ContentText text={"You are out of time"} />
           )}
-
           <MyButton title={"New Game"} onPress={handleNewGame} />
         </Card>
       )}
@@ -174,25 +176,18 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     padding: 10,
   },
-  textStyle: {
-    padding: 5,
-  },
+
   hintStyle: {
-    padding: 5,
     color: colors.blue,
   },
   textInputStyle: {
-    // height: 40,
     width: "20%",
     textAlign: "center",
-    // borderColor: colors.blue,
-    // borderBottomWidth: 1,
-    // color: colors.blue,
-    // padding: 10,
     marginBottom: 30,
   },
   imageStyle: {
     width: 100,
     height: 100,
+    margin: 10,
   },
 });

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import colors from "../colors";
 import Card from "../components/Card";
 import MyButton from "../components/MyButton";
+import ContentText from "../components/ContentText";
 
 export default function ConfirmScreen({
   isConfirmVisible,
@@ -15,13 +16,16 @@ export default function ConfirmScreen({
     <Modal transparent={true} animationType="slide" visible={isConfirmVisible}>
       <View style={styles.container}>
         <Card style={styles.card}>
-          <Text style={styles.textStyle}>
-            Hello {userName},{"\n"}
-            Here is the email that you entered:{"\n"}
-            {userEmail}
-            {"\n"} {"\n"}
-            If it is not correct, please go back and enter again.
-          </Text>
+          <View style={styles.textContainer}>
+            <ContentText text={"Hello " + userName + ","} />
+            <ContentText text={"Here is the email that you entered:"} />
+            <ContentText text={userEmail} />
+            <ContentText
+              text={
+                "\n" + "If it is not correct, please go back and enter again."
+              }
+            />
+          </View>
           <View style={styles.buttonContainer}>
             <MyButton
               title={"Go back"}
@@ -44,15 +48,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   card: {
-    // backgroundColor: colors.cardBackGround,
     flex: 0.3,
-    // padding: 10,
-    // borderRadius: 5,
     width: "80%",
   },
-  textStyle: {
+  textContainer: {
+    flex: 3,
+    justifyContent: "space-evenly",
     padding: 10,
-    lineHeight: 20,
   },
   buttonContainer: {
     flex: 1,

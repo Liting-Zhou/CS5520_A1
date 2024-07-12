@@ -6,6 +6,8 @@ import GradientBackground from "../components/GradientBackground";
 import Card from "../components/Card";
 import MyButton from "../components/MyButton";
 import Input from "../components/Input";
+import ErrorMessage from "../components/ErrorMessage";
+import ContentText from "../components/ContentText";
 
 export default function StartScreen({
   startHandler,
@@ -62,44 +64,39 @@ export default function StartScreen({
 
   return (
     <View style={styles.container}>
-      {/* <LinearGradient
-        colors={[
-          colors.backGroundOne,
-          colors.backGroundTwo,
-          colors.backGroundThree,
-        ]}
-        style={styles.background}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 0, y: 1 }}
-      /> */}
       <GradientBackground />
 
       <Text style={styles.welcomeStyle}>Welcome</Text>
       <Card style={styles.card}>
         <View style={styles.topContainer}>
-          <Text>Name</Text>
+          {/* <Text>Name</Text> */}
+          <ContentText text={"Name"} style={styles.nameTextStyle} />
           <Input
             value={userName}
             onChangeText={updateUserName}
             onBlur={validateName}
           />
-          {errorMessageName && (
-            <Text style={styles.errorMessage}>{errorMessageName}</Text>
-          )}
-          <Text style={styles.textStyle}>Email address</Text>
+          {errorMessageName && <ErrorMessage message={errorMessageName} />}
 
+          {/* <Text style={styles.textStyle}>Email address</Text> */}
+          <ContentText text={"Email address"} style={styles.emailTextStyle} />
           <Input
             value={userEmail}
             onChangeText={updateUserEmail}
             onBlur={validateEmail}
           />
           {errorMessageEmail && (
-            <Text style={styles.errorMessage}>{errorMessageEmail}</Text>
+            // <Text style={styles.errorMessage}>{errorMessageEmail}</Text>
+            <ErrorMessage message={errorMessageEmail} />
           )}
         </View>
         <View style={styles.robotContainer}>
           <Checkbox value={toggleCheckBox} onValueChange={setToggleCheckBox} />
-          <Text style={styles.textStyleRobot}>I am not a robot</Text>
+          {/* <Text style={styles.textStyleRobot}>I am not a robot</Text> */}
+          <ContentText
+            text={"I am not a robot"}
+            style={styles.textStyleRobot}
+          />
         </View>
         <View style={styles.buttonContainer}>
           <MyButton
@@ -135,20 +132,19 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     color: colors.blue,
   },
-  textStyle: {
+  nameTextStyle: {
+    padding: 0,
+    marginTop: 5,
+  },
+  emailTextStyle: {
     marginTop: 30,
+    padding: 0,
   },
   textStyleRobot: {
     padding: 10,
   },
-  // textInputStyle: {
-  //   height: 40,
-  //   borderColor: colors.blue,
-  //   borderBottomWidth: 1,
-  //   color: colors.blue,
-  // },
   topContainer: {
-    flex: 3,
+    flex: 4,
     padding: 10,
   },
   robotContainer: {
@@ -161,11 +157,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-around",
-    padding: 10,
-  },
-  errorMessage: {
-    color: colors.darkRed,
-    fontSize: 12,
-    padding: 2,
+    alignItems: "center",
   },
 });
