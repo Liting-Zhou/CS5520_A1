@@ -8,6 +8,7 @@ import {
   Image,
 } from "react-native";
 import React, { useState, useEffect } from "react";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function GameScreen({ startGame }) {
   const [number, setNumber] = useState(Math.floor(Math.random() * 101));
@@ -77,6 +78,12 @@ export default function GameScreen({ startGame }) {
 
   return (
     <View style={styles.container}>
+      <LinearGradient
+        colors={["powderblue", "deepskyblue", "navy"]}
+        style={styles.background}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0, y: 1 }}
+      />
       <View style={styles.buttonContainer}>
         <Button title="Restart" onPress={handleRestart}></Button>
       </View>
@@ -91,7 +98,7 @@ export default function GameScreen({ startGame }) {
             keyboardType="numeric"
           ></TextInput>
           {hintUsed && (
-            <Text style={styles.textStyle}>
+            <Text style={styles.hintStyle}>
               Hint:
               {number < 50
                 ? " the number is between 1 and 50"
@@ -156,7 +163,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-
+  background: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+  },
   card: {
     backgroundColor: "papayawhip",
     padding: 10,
@@ -174,6 +187,10 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     padding: 5,
+  },
+  hintStyle: {
+    padding: 5,
+    color: "blue",
   },
   textInputStyle: {
     height: 40,

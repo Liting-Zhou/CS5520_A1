@@ -123,13 +123,11 @@ const styles = StyleSheet.create({
     // width: "60%",
   },
   background: {
-    // flex: 1,
     position: "absolute",
     left: 0,
     right: 0,
     top: 0,
     bottom: 0,
-    // height: "100%",
   },
   card: {
     backgroundColor: "papayawhip",
@@ -156,9 +154,6 @@ const styles = StyleSheet.create({
     borderColor: "blue",
     borderBottomWidth: 1,
     color: "blue",
-    // marginBottom: 30,
-    // width: "100%",
-    // padding: 5,
   },
   topContainer: {
     flex: 3,

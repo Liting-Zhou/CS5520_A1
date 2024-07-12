@@ -16,8 +16,7 @@ export default function ConfirmScreen({
       <View style={styles.container}>
         <View style={styles.card}>
           <Text style={styles.textStyle}>
-            Hello {userName}
-            {"\n"}
+            Hello {userName},{"\n"}
             Here is the email that you entered:{"\n"}
             {userEmail}
             {"\n"} {"\n"}
@@ -58,6 +57,7 @@ const styles = StyleSheet.create({
   textStyle: {
     padding: 10,
     lineHeight: 20,
+    // color: "blue",
   },
   buttonContainer: {
     flex: 1,
