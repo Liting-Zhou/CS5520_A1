@@ -4,6 +4,7 @@ import colors from "../colors";
 import GradientBackground from "../components/GradientBackground";
 import Card from "../components/Card";
 import MyButton from "../components/MyButton";
+import Input from "../components/Input";
 
 export default function GameScreen({ startGame }) {
   const [number, setNumber] = useState(Math.floor(Math.random() * 101));
@@ -81,12 +82,18 @@ export default function GameScreen({ startGame }) {
       {gameState === "guessing" && (
         <Card style={styles.card}>
           <Text style={styles.textStyle}>Guess A Number Between 1 & 100</Text>
-          <TextInput
+          {/* <TextInput
             style={styles.textInputStyle}
             value={guess}
             onChangeText={setGuess}
             keyboardType="numeric"
-          ></TextInput>
+          ></TextInput> */}
+          <Input
+            value={guess}
+            onChangeText={setGuess}
+            keyboardType="numeric"
+            inputStyle={styles.textInputStyle}
+          />
           {hintUsed && (
             <Text style={styles.hintStyle}>
               Hint:
@@ -175,12 +182,13 @@ const styles = StyleSheet.create({
     color: colors.blue,
   },
   textInputStyle: {
-    height: 40,
+    // height: 40,
     width: "20%",
-    borderColor: colors.blue,
-    borderBottomWidth: 1,
-    color: colors.blue,
-    padding: 10,
+    textAlign: "center",
+    // borderColor: colors.blue,
+    // borderBottomWidth: 1,
+    // color: colors.blue,
+    // padding: 10,
     marginBottom: 30,
   },
   imageStyle: {

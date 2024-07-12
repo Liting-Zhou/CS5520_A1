@@ -5,6 +5,7 @@ import colors from "../colors";
 import GradientBackground from "../components/GradientBackground";
 import Card from "../components/Card";
 import MyButton from "../components/MyButton";
+import Input from "../components/Input";
 
 export default function StartScreen({
   startHandler,
@@ -75,25 +76,23 @@ export default function StartScreen({
 
       <Text style={styles.welcomeStyle}>Welcome</Text>
       <Card style={styles.card}>
-        {/* <View style={styles.card}> */}
         <View style={styles.topContainer}>
           <Text>Name</Text>
-          <TextInput
-            style={styles.textInputStyle}
+          <Input
             value={userName}
             onChangeText={updateUserName}
             onBlur={validateName}
-          ></TextInput>
+          />
           {errorMessageName && (
             <Text style={styles.errorMessage}>{errorMessageName}</Text>
           )}
           <Text style={styles.textStyle}>Email address</Text>
-          <TextInput
-            style={styles.textInputStyle}
+
+          <Input
             value={userEmail}
             onChangeText={updateUserEmail}
             onBlur={validateEmail}
-          ></TextInput>
+          />
           {errorMessageEmail && (
             <Text style={styles.errorMessage}>{errorMessageEmail}</Text>
           )}
@@ -114,7 +113,6 @@ export default function StartScreen({
             disabled={toggleCheckBox === false}
           />
         </View>
-        {/* </View> */}
       </Card>
     </View>
   );
@@ -126,18 +124,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  // background: {
-  //   position: "absolute",
-  //   left: 0,
-  //   right: 0,
-  //   top: 0,
-  //   bottom: 0,
-  // },
   card: {
-    // backgroundColor: colors.cardBackGround,
     flex: 0.5,
-    // padding: 10,
-    // borderRadius: 5,
     width: "70%",
   },
   welcomeStyle: {
@@ -153,12 +141,12 @@ const styles = StyleSheet.create({
   textStyleRobot: {
     padding: 10,
   },
-  textInputStyle: {
-    height: 40,
-    borderColor: colors.blue,
-    borderBottomWidth: 1,
-    color: colors.blue,
-  },
+  // textInputStyle: {
+  //   height: 40,
+  //   borderColor: colors.blue,
+  //   borderBottomWidth: 1,
+  //   color: colors.blue,
+  // },
   topContainer: {
     flex: 3,
     padding: 10,
@@ -169,7 +157,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
   },
-
   buttonContainer: {
     flex: 1,
     flexDirection: "row",
