@@ -99,7 +99,11 @@ export default function GameScreen({ startGame }) {
           )}
           <Text style={styles.textStyle}>Attempts left: {attempts}</Text>
           <Text style={styles.textStyle}>Timer: {timer}s</Text>
-          <Button title="Use a hint" onPress={handleUseHint}></Button>
+          <Button
+            title="Use a hint"
+            onPress={handleUseHint}
+            disabled={hintUsed}
+          ></Button>
           <Button title="Submit guess" onPress={handleGuess}></Button>
         </View>
       )}
@@ -109,6 +113,7 @@ export default function GameScreen({ startGame }) {
           <Text style={styles.textStyle}>Attempts used: {4 - attempts}</Text>
           <Image
             source={{ uri: `https://picsum.photos/id/${number}/100/100` }}
+            alt="image from picsum.photos"
           />
           <Button title="New Game" onPress={handleNewGame}></Button>
         </View>
@@ -127,6 +132,7 @@ export default function GameScreen({ startGame }) {
           <Image
             source={require("../assets/crying-face.png")}
             style={styles.imageStyle}
+            alt="crying face emoji"
           />
           {attempts === 0 && (
             <Text style={styles.textStyle}>You are out of attempts</Text>
