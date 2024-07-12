@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Platform } from "react-native";
 import React from "react";
 import colors from "../colors";
 
@@ -11,12 +11,17 @@ const styles = StyleSheet.create({
     backgroundColor: colors.cardBackGround,
     padding: 10,
     borderRadius: 5,
-    // shadow for iOS
-    shadowColor: colors.shadow, //todo: find a better color for shadow
-    shadowOffset: { width: 0, height: 5 },
-    shadowOpacity: 0.8,
-    shadowRadius: 10,
-    // shadow for Android
-    elevation: 5,
+    // shadow for different platforms
+    ...Platform.select({
+      ios: {
+        shadowColor: colors.shadow, //todo: find a better color for shadow
+        shadowOffset: { width: 0, height: 5 },
+        shadowOpacity: 0.8,
+        shadowRadius: 10,
+      },
+      android: {
+        elevation: 20,
+      },
+    }),
   },
 });
