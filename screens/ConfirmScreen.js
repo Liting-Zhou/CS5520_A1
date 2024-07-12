@@ -9,9 +9,6 @@ export default function ConfirmScreen({
   userEmail,
   startGame,
 }) {
-  // const handleGoBack = () => {
-  //   handleConfirmVisible();
-  // };
   return (
     <Modal transparent={true} animationType="slide" visible={isConfirmVisible}>
       <View style={styles.container}>

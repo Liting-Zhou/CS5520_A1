@@ -10,6 +10,7 @@ import {
 import React, { useState, useEffect } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import colors from "../colors";
+import GradientBackground from "../components/GradientBackground";
 
 export default function GameScreen({ startGame }) {
   const [number, setNumber] = useState(Math.floor(Math.random() * 101));
@@ -79,7 +80,7 @@ export default function GameScreen({ startGame }) {
 
   return (
     <View style={styles.container}>
-      <LinearGradient
+      {/* <LinearGradient
         colors={[
           colors.backGroundOne,
           colors.backGroundTwo,
@@ -88,7 +89,8 @@ export default function GameScreen({ startGame }) {
         style={styles.background}
         start={{ x: 0, y: 0 }}
         end={{ x: 0, y: 1 }}
-      />
+      /> */}
+      <GradientBackground />
       <View style={styles.buttonContainer}>
         <Button
           title="Restart"
@@ -192,13 +194,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  background: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-  },
+  // background: {
+  //   position: "absolute",
+  //   left: 0,
+  //   right: 0,
+  //   top: 0,
+  //   bottom: 0,
+  // },
   card: {
     backgroundColor: colors.cardBackGround,
     padding: 10,

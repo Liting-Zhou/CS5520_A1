@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Checkbox from "expo-checkbox";
 import { LinearGradient } from "expo-linear-gradient";
 import colors from "../colors";
+import GradientBackground from "../components/GradientBackground";
 
 export default function StartScreen({
   startHandler,
@@ -59,7 +60,7 @@ export default function StartScreen({
 
   return (
     <View style={styles.container}>
-      <LinearGradient
+      {/* <LinearGradient
         colors={[
           colors.backGroundOne,
           colors.backGroundTwo,
@@ -68,7 +69,8 @@ export default function StartScreen({
         style={styles.background}
         start={{ x: 0, y: 0 }}
         end={{ x: 0, y: 1 }}
-      />
+      /> */}
+      <GradientBackground />
       <Text style={styles.welcomeStyle}>Welcome</Text>
       <View style={styles.card}>
         <View style={styles.topContainer}>
@@ -125,13 +127,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  background: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-  },
+  // background: {
+  //   position: "absolute",
+  //   left: 0,
+  //   right: 0,
+  //   top: 0,
+  //   bottom: 0,
+  // },
   card: {
     backgroundColor: colors.cardBackGround,
     flex: 0.5,
