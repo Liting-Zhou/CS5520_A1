@@ -8,9 +8,9 @@ import {
   Image,
 } from "react-native";
 import React, { useState, useEffect } from "react";
-import { LinearGradient } from "expo-linear-gradient";
 import colors from "../colors";
 import GradientBackground from "../components/GradientBackground";
+import Card from "../components/Card";
 
 export default function GameScreen({ startGame }) {
   const [number, setNumber] = useState(Math.floor(Math.random() * 101));
@@ -33,7 +33,7 @@ export default function GameScreen({ startGame }) {
   }, [timer]);
 
   const handleRestart = () => {
-    setNumber(Math.floor(Math.random() * 101)); //todo, maybe set to NaN
+    setNumber(Math.floor(Math.random() * 101));
     startGame(false);
     setAttempts(4);
     setTimer(60);
@@ -100,7 +100,8 @@ export default function GameScreen({ startGame }) {
       </View>
 
       {gameState === "guessing" && (
-        <View style={styles.card}>
+        // <View style={styles.card}>
+        <Card style={styles.card}>
           <Text style={styles.textStyle}>Guess A Number Between 1 & 100</Text>
           <TextInput
             style={styles.textInputStyle}
@@ -129,10 +130,12 @@ export default function GameScreen({ startGame }) {
             onPress={handleGuess}
             color={colors.buttonNormal}
           ></Button>
-        </View>
+        </Card>
+        // </View>
       )}
       {gameState === "success" && (
-        <View style={styles.card}>
+        // <View style={styles.card}>
+        <Card style={styles.card}>
           <Text style={styles.textStyle}>You guessed correct!</Text>
           <Text style={styles.textStyle}>Attempts used: {4 - attempts}</Text>
           <Image
@@ -145,11 +148,13 @@ export default function GameScreen({ startGame }) {
             onPress={handleNewGame}
             color={colors.buttonNormal}
           ></Button>
-        </View>
+        </Card>
+        // </View>
       )}
 
       {gameState === "guessAgain" && (
-        <View style={styles.card}>
+        // <View style={styles.card}>
+        <Card style={styles.card}>
           <Text style={styles.textStyle}>You did not guess correct!</Text>
           <Button
             title="Try Again"
@@ -161,10 +166,12 @@ export default function GameScreen({ startGame }) {
             onPress={handleEndGame}
             color={colors.buttonNormal}
           ></Button>
-        </View>
+        </Card>
+        // </View>
       )}
       {gameState === "gameOver" && (
-        <View style={styles.card}>
+        // <View style={styles.card}>
+        <Card style={styles.card}>
           <Text style={styles.textStyle}>The game is over!</Text>
           <Image
             source={require("../assets/crying-face.png")}
@@ -182,7 +189,8 @@ export default function GameScreen({ startGame }) {
             onPress={handleNewGame}
             color={colors.buttonNormal}
           ></Button>
-        </View>
+        </Card>
+        // </View>
       )}
     </View>
   );
@@ -202,9 +210,9 @@ const styles = StyleSheet.create({
   //   bottom: 0,
   // },
   card: {
-    backgroundColor: colors.cardBackGround,
-    padding: 10,
-    borderRadius: 5,
+    // backgroundColor: colors.cardBackGround,
+    // padding: 10,
+    // borderRadius: 5,
     width: "80%",
     minHeight: "20%",
     alignItems: "center",

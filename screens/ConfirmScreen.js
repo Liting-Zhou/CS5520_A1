@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, Modal, Button } from "react-native";
 import React, { useState } from "react";
 import colors from "../colors";
+import Card from "../components/Card";
 
 export default function ConfirmScreen({
   isConfirmVisible,
@@ -12,7 +13,8 @@ export default function ConfirmScreen({
   return (
     <Modal transparent={true} animationType="slide" visible={isConfirmVisible}>
       <View style={styles.container}>
-        <View style={styles.card}>
+        <Card style={styles.card}>
+          {/* <View style={styles.card}> */}
           <Text style={styles.textStyle}>
             Hello {userName},{"\n"}
             Here is the email that you entered:{"\n"}
@@ -32,7 +34,8 @@ export default function ConfirmScreen({
               color={colors.buttonNormal}
             ></Button>
           </View>
-        </View>
+          {/* </View> */}
+        </Card>
       </View>
     </Modal>
   );
@@ -46,10 +49,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   card: {
-    backgroundColor: colors.cardBackGround,
+    // backgroundColor: colors.cardBackGround,
     flex: 0.3,
-    padding: 10,
-    borderRadius: 5,
+    // padding: 10,
+    // borderRadius: 5,
     width: "80%",
   },
   textStyle: {

@@ -8,6 +8,7 @@ const colors = {
   backGroundThree: "navy",
   darkRed: "darkred",
   buttonNormal: "dodgerblue",
+  shadow: "black",
 };
 
 export default colors;

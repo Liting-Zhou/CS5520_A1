@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 import React, { useState } from "react";
 import Checkbox from "expo-checkbox";
-import { LinearGradient } from "expo-linear-gradient";
 import colors from "../colors";
 import GradientBackground from "../components/GradientBackground";
+import Card from "../components/Card";
 
 export default function StartScreen({
   startHandler,
@@ -71,8 +71,10 @@ export default function StartScreen({
         end={{ x: 0, y: 1 }}
       /> */}
       <GradientBackground />
+
       <Text style={styles.welcomeStyle}>Welcome</Text>
-      <View style={styles.card}>
+      <Card style={styles.card}>
+        {/* <View style={styles.card}> */}
         <View style={styles.topContainer}>
           <Text>Name</Text>
           <TextInput
@@ -116,7 +118,8 @@ export default function StartScreen({
             color={colors.buttonNormal}
           ></Button>
         </View>
-      </View>
+        {/* </View> */}
+      </Card>
     </View>
   );
 }
@@ -135,10 +138,10 @@ const styles = StyleSheet.create({
   //   bottom: 0,
   // },
   card: {
-    backgroundColor: colors.cardBackGround,
+    // backgroundColor: colors.cardBackGround,
     flex: 0.5,
-    padding: 10,
-    borderRadius: 5,
+    // padding: 10,
+    // borderRadius: 5,
     width: "70%",
   },
   welcomeStyle: {
