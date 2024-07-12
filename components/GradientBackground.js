@@ -9,7 +9,7 @@ export default function GradientBackground() {
       colors={[
         colors.backGroundOne,
         colors.backGroundTwo,
-        colors.backGroundThree,
+        // colors.backGroundThree,
       ]}
       style={styles.background}
       start={{ x: 0, y: 0 }}

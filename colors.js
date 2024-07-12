@@ -3,12 +3,14 @@
 const colors = {
   blue: "blue",
   cardBackGround: "papayawhip",
-  backGroundOne: "powderblue",
-  backGroundTwo: "deepskyblue",
-  backGroundThree: "navy",
+  // backGroundOne: "powderblue",
+  // backGroundTwo: "deepskyblue",
+  // backGroundThree: "navy",
+  backGroundOne: "#FBB03B",
+  backGroundTwo: "#D4145A",
   darkRed: "darkred",
   buttonNormal: "dodgerblue",
-  shadow: "darkslateblue",
+  shadow: "brown",
 };
 
 export default colors;

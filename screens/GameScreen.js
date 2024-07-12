@@ -8,10 +8,12 @@ import Input from "../components/Input";
 import ContentText from "../components/ContentText";
 
 export default function GameScreen({ startGame }) {
+  const numberAttempts = 4;
+  const timerSeconds = 30;
   const [number, setNumber] = useState(Math.floor(Math.random() * 101));
   const [guess, setGuess] = useState("");
-  const [timer, setTimer] = useState(10);
-  const [attempts, setAttempts] = useState(4);
+  const [timer, setTimer] = useState(timerSeconds);
+  const [attempts, setAttempts] = useState(numberAttempts);
   const [hintUsed, setHintUsed] = useState(false);
   const [gameState, setGameState] = useState("guessing"); // 'guessing', 'success','guessAgain', 'gameOver'
   console.log("number: ", number);
@@ -30,8 +32,8 @@ export default function GameScreen({ startGame }) {
   const handleRestart = () => {
     setNumber(Math.floor(Math.random() * 101));
     startGame(false);
-    setAttempts(4);
-    setTimer(30);
+    setAttempts(numberAttempts);
+    setTimer(timerSeconds);
   };
   const handleGuess = () => {
     const guessedNumber = parseInt(guess);
@@ -55,8 +57,8 @@ export default function GameScreen({ startGame }) {
   const handleNewGame = () => {
     setNumber(Math.floor(Math.random() * 101));
     setGuess("");
-    setTimer(60);
-    setAttempts(4);
+    setTimer(timerSeconds);
+    setAttempts(numberAttempts);
     setGameState("guessing");
     setHintUsed(false);
   };
@@ -118,7 +120,7 @@ export default function GameScreen({ startGame }) {
           {/* <Text style={styles.textStyle}>You guessed correct!</Text> */}
           <ContentText text={"You guessed correct!"} />
           {/* <Text style={styles.textStyle}>Attempts used: {4 - attempts}</Text> */}
-          <ContentText text={"Attempts used: " + (4 - attempts)} />
+          <ContentText text={"Attempts used: " + (numberAttempts - attempts)} />
           <Image
             source={{ uri: `https://picsum.photos/id/${number}/100/100` }}
             style={styles.imageStyle}
