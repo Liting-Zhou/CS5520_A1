@@ -89,14 +89,11 @@ export default function GameScreen({ startGame }) {
 
       {gameState === "guessing" && (
         <Card style={styles.card}>
-          {/* <Text style={styles.textStyle}>Guess A Number Between 1 & 100</Text> */}
           <ContentText text={"Guess A Number Between 1 & 100"} />
           <Input
             value={guess}
             onChangeText={setGuess}
-            // keyboardType="numeric"
             inputStyle={styles.textInputStyle}
-            // onBlur={() => Keyboard.dismiss()}
           />
           {hintUsed && (
             // <Text style={styles.hintStyle}>
@@ -170,8 +167,12 @@ const styles = StyleSheet.create({
   },
 
   card: {
+    // flexGrow: 0,
+    // flexShrink: 1,
+    // alignSelf: "center",
     width: "80%",
     minHeight: "10%",
+    // maxHeight: "50%",
     alignItems: "center",
   },
   buttonContainer: {

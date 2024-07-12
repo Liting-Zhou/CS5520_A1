@@ -65,7 +65,6 @@ export default function StartScreen({
   return (
     <View style={styles.container}>
       <GradientBackground />
-
       <Text style={styles.welcomeStyle}>Welcome</Text>
       <Card style={styles.card}>
         <View style={styles.topContainer}>

@@ -4,15 +4,19 @@ import colors from "../colors";
 
 export default function MyButton({ title, onPress, color, disabled }) {
   return (
-    // <View>
-    <Button
-      title={title}
-      onPress={onPress}
-      color={color || colors.buttonNormal}
-      disabled={disabled}
-    />
-    // </View>
+    <View style={styles.buttonContainer}>
+      <Button
+        title={title}
+        onPress={onPress}
+        color={color || colors.buttonNormal}
+        disabled={disabled}
+      />
+    </View>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  buttonContainer: {
+    margin: 5,
+  },
+});
