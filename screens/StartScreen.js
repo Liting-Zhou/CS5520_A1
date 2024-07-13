@@ -5,6 +5,8 @@ import {
   TextInput,
   Button,
   ScrollView,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import React, { useState } from "react";
 import Checkbox from "expo-checkbox";
@@ -70,59 +72,64 @@ export default function StartScreen({
   };
 
   return (
-    <View style={styles.container}>
-      <GradientBackground />
-      <Text style={styles.welcomeStyle}>Welcome</Text>
-      <Card style={styles.card}>
-        <ScrollView contentContainerStyle={styles.scrollView}>
-          <View style={styles.topContainer}>
-            {/* <Text>Name</Text> */}
-            <ContentText text={"Name"} style={styles.nameTextStyle} />
-            <Input
-              value={userName}
-              onChangeText={updateUserName}
-              onBlur={validateName}
-            />
-            {errorMessageName && <ErrorMessage message={errorMessageName} />}
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <GradientBackground />
+        <Text style={styles.welcomeStyle}>Welcome</Text>
+        <Card style={styles.card}>
+          <ScrollView contentContainerStyle={styles.scrollView}>
+            <View style={styles.topContainer}>
+              {/* <Text>Name</Text> */}
+              <ContentText text={"Name"} style={styles.nameTextStyle} />
+              <Input
+                value={userName}
+                onChangeText={updateUserName}
+                onBlur={validateName}
+              />
+              {errorMessageName && <ErrorMessage message={errorMessageName} />}
 
-            {/* <Text style={styles.textStyle}>Email address</Text> */}
-            <ContentText text={"Email address"} style={styles.emailTextStyle} />
-            <Input
-              value={userEmail}
-              onChangeText={updateUserEmail}
-              onBlur={validateEmail}
-            />
-            {errorMessageEmail && (
-              // <Text style={styles.errorMessage}>{errorMessageEmail}</Text>
-              <ErrorMessage message={errorMessageEmail} />
-            )}
-          </View>
-          <View style={styles.robotContainer}>
-            <Checkbox
-              value={toggleCheckBox}
-              onValueChange={setToggleCheckBox}
-            />
-            {/* <Text style={styles.textStyleRobot}>I am not a robot</Text> */}
-            <ContentText
-              text={"I am not a robot"}
-              style={styles.textStyleRobot}
-            />
-          </View>
-          <View style={styles.buttonContainer}>
-            <MyButton
-              title={"Reset"}
-              onPress={handleReset}
-              color={colors.darkRed}
-            />
-            <MyButton
-              title={"Start"}
-              onPress={handleStart}
-              disabled={toggleCheckBox === false}
-            />
-          </View>
-        </ScrollView>
-      </Card>
-    </View>
+              {/* <Text style={styles.textStyle}>Email address</Text> */}
+              <ContentText
+                text={"Email address"}
+                style={styles.emailTextStyle}
+              />
+              <Input
+                value={userEmail}
+                onChangeText={updateUserEmail}
+                onBlur={validateEmail}
+              />
+              {errorMessageEmail && (
+                // <Text style={styles.errorMessage}>{errorMessageEmail}</Text>
+                <ErrorMessage message={errorMessageEmail} />
+              )}
+            </View>
+            <View style={styles.robotContainer}>
+              <Checkbox
+                value={toggleCheckBox}
+                onValueChange={setToggleCheckBox}
+              />
+              {/* <Text style={styles.textStyleRobot}>I am not a robot</Text> */}
+              <ContentText
+                text={"I am not a robot"}
+                style={styles.textStyleRobot}
+              />
+            </View>
+            <View style={styles.buttonContainer}>
+              <MyButton
+                title={"Reset"}
+                onPress={handleReset}
+                color={colors.darkRed}
+              />
+              <MyButton
+                title={"Start"}
+                onPress={handleStart}
+                disabled={toggleCheckBox === false}
+              />
+            </View>
+          </ScrollView>
+        </Card>
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 

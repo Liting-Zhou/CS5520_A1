@@ -1,4 +1,13 @@
-import { StyleSheet, Text, View, TextInput, Alert, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Alert,
+  Image,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import React, { useState, useEffect } from "react";
 import colors from "../colors";
 import GradientBackground from "../components/GradientBackground";
@@ -81,81 +90,85 @@ export default function GameScreen({ startGame }) {
       : "the number is between 50 and 100");
 
   return (
-    <View style={styles.container}>
-      <GradientBackground />
-      <View style={styles.buttonContainer}>
-        <MyButton title={"Restart"} onPress={handleRestart} />
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <GradientBackground />
+        <View style={styles.buttonContainer}>
+          <MyButton title={"Restart"} onPress={handleRestart} />
+        </View>
+
+        {gameState === "guessing" && (
+          <Card style={styles.card}>
+            <ContentText text={"Guess A Number Between 1 & 100"} />
+            <Input
+              value={guess}
+              onChangeText={setGuess}
+              inputStyle={styles.textInputStyle}
+            />
+            {hintUsed && (
+              // <Text style={styles.hintStyle}>
+              <ContentText text={hintText} style={styles.hintStyle} />
+            )}
+            {/* <Text style={styles.textStyle}>Attempts left: {attempts}</Text> */}
+            <ContentText text={"Attempts left: " + attempts} />
+            {/* <Text style={styles.textStyle}>Timer: {timer}s</Text> */}
+            <ContentText text={"Timer: " + timer} />
+
+            <MyButton
+              title={"Use a hint"}
+              onPress={handleUseHint}
+              disabled={hintUsed}
+            />
+            <MyButton title={"Submit guess"} onPress={handleGuess} />
+          </Card>
+        )}
+        {gameState === "success" && (
+          <Card style={styles.card}>
+            {/* <Text style={styles.textStyle}>You guessed correct!</Text> */}
+            <ContentText text={"You guessed correct!"} />
+            {/* <Text style={styles.textStyle}>Attempts used: {4 - attempts}</Text> */}
+            <ContentText
+              text={"Attempts used: " + (numberAttempts - attempts)}
+            />
+            <Image
+              source={{ uri: `https://picsum.photos/id/${number}/100/100` }}
+              style={styles.imageStyle}
+              alt="image from picsum.photos"
+            />
+            <MyButton title={"New Game"} onPress={handleNewGame} />
+          </Card>
+        )}
+
+        {gameState === "guessAgain" && (
+          <Card style={styles.card}>
+            {/* <Text style={styles.textStyle}>You did not guess correct!</Text> */}
+            <ContentText text={"You did not guess correct!"} />
+            <MyButton title={"Try Again"} onPress={handleTryAgain} />
+            <MyButton title={"End the game"} onPress={handleEndGame} />
+          </Card>
+        )}
+        {gameState === "gameOver" && (
+          <Card style={styles.card}>
+            {/* <Text style={styles.textStyle}>The game is over!</Text> */}
+            <ContentText text={"The game is over!"} />
+            <Image
+              source={require("../assets/crying-face.png")}
+              style={styles.imageStyle}
+              alt="crying face emoji"
+            />
+            {attempts === 0 && (
+              // <Text style={styles.textStyle}>You are out of attempts</Text>
+              <ContentText text={"You are out of attempts"} />
+            )}
+            {timer === 0 && (
+              // <Text style={styles.textStyle}>You are out of time</Text>
+              <ContentText text={"You are out of time"} />
+            )}
+            <MyButton title={"New Game"} onPress={handleNewGame} />
+          </Card>
+        )}
       </View>
-
-      {gameState === "guessing" && (
-        <Card style={styles.card}>
-          <ContentText text={"Guess A Number Between 1 & 100"} />
-          <Input
-            value={guess}
-            onChangeText={setGuess}
-            inputStyle={styles.textInputStyle}
-          />
-          {hintUsed && (
-            // <Text style={styles.hintStyle}>
-            <ContentText text={hintText} style={styles.hintStyle} />
-          )}
-          {/* <Text style={styles.textStyle}>Attempts left: {attempts}</Text> */}
-          <ContentText text={"Attempts left: " + attempts} />
-          {/* <Text style={styles.textStyle}>Timer: {timer}s</Text> */}
-          <ContentText text={"Timer: " + timer} />
-
-          <MyButton
-            title={"Use a hint"}
-            onPress={handleUseHint}
-            disabled={hintUsed}
-          />
-          <MyButton title={"Submit guess"} onPress={handleGuess} />
-        </Card>
-      )}
-      {gameState === "success" && (
-        <Card style={styles.card}>
-          {/* <Text style={styles.textStyle}>You guessed correct!</Text> */}
-          <ContentText text={"You guessed correct!"} />
-          {/* <Text style={styles.textStyle}>Attempts used: {4 - attempts}</Text> */}
-          <ContentText text={"Attempts used: " + (numberAttempts - attempts)} />
-          <Image
-            source={{ uri: `https://picsum.photos/id/${number}/100/100` }}
-            style={styles.imageStyle}
-            alt="image from picsum.photos"
-          />
-          <MyButton title={"New Game"} onPress={handleNewGame} />
-        </Card>
-      )}
-
-      {gameState === "guessAgain" && (
-        <Card style={styles.card}>
-          {/* <Text style={styles.textStyle}>You did not guess correct!</Text> */}
-          <ContentText text={"You did not guess correct!"} />
-          <MyButton title={"Try Again"} onPress={handleTryAgain} />
-          <MyButton title={"End the game"} onPress={handleEndGame} />
-        </Card>
-      )}
-      {gameState === "gameOver" && (
-        <Card style={styles.card}>
-          {/* <Text style={styles.textStyle}>The game is over!</Text> */}
-          <ContentText text={"The game is over!"} />
-          <Image
-            source={require("../assets/crying-face.png")}
-            style={styles.imageStyle}
-            alt="crying face emoji"
-          />
-          {attempts === 0 && (
-            // <Text style={styles.textStyle}>You are out of attempts</Text>
-            <ContentText text={"You are out of attempts"} />
-          )}
-          {timer === 0 && (
-            // <Text style={styles.textStyle}>You are out of time</Text>
-            <ContentText text={"You are out of time"} />
-          )}
-          <MyButton title={"New Game"} onPress={handleNewGame} />
-        </Card>
-      )}
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 
@@ -178,7 +191,8 @@ const styles = StyleSheet.create({
   buttonContainer: {
     width: "80%",
     alignItems: "flex-end",
-    padding: 10,
+    // padding: 10,
+    marginBottom: 10,
   },
 
   hintStyle: {

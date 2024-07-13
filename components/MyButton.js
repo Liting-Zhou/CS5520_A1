@@ -17,6 +17,6 @@ export default function MyButton({ title, onPress, color, disabled }) {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    margin: 5,
+    marginTop: 10,
   },
 });
