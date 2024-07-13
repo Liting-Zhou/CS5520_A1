@@ -1,5 +1,4 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React, { useState } from "react";
 import StartScreen from "./screens/StartScreen";
 import ConfirmScreen from "./screens/ConfirmScreen";
@@ -13,7 +12,6 @@ export default function App() {
 
   const handleStart = () => {
     setConfirmVisible(true);
-    console.log("confirmVisible: ", confirmVisible);
   };
   const updateUserName = (name) => {
     setName(name);

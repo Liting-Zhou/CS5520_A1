@@ -1,8 +1,6 @@
 import {
   StyleSheet,
-  Text,
   View,
-  TextInput,
   Alert,
   Image,
   TouchableWithoutFeedback,
@@ -25,7 +23,7 @@ export default function GameScreen({ startGame }) {
   const [attempts, setAttempts] = useState(numberAttempts);
   const [hintUsed, setHintUsed] = useState(false);
   const [gameState, setGameState] = useState("guessing"); // 'guessing', 'success','guessAgain', 'gameOver'
-  console.log("number: ", number);
+  // console.log("number: ", number);
 
   useEffect(() => {
     if (timer > 0 && gameState !== "success" && gameState !== "gameOver") {
@@ -44,18 +42,17 @@ export default function GameScreen({ startGame }) {
     setAttempts(numberAttempts);
     setTimer(timerSeconds);
   };
+
   const handleGuess = () => {
     const guessedNumber = parseInt(guess);
     if (isNaN(guessedNumber) || guessedNumber < 1 || guessedNumber > 100) {
       Alert.alert("Invalid guess", "Please enter a number between 1 and 100.");
       return;
     }
-    setAttempts(attempts - 1);
-    console.log("guessedNumber: ", guessedNumber);
+    setAttempts((prevAttempts) => prevAttempts - 1);
     if (guessedNumber === number) {
       setGameState("success");
     } else {
-      console.log("attempts left: ", attempts);
       if (attempts - 1 === 0) {
         setGameState("gameOver");
       } else {
@@ -106,12 +103,9 @@ export default function GameScreen({ startGame }) {
               inputStyle={styles.textInputStyle}
             />
             {hintUsed && (
-              // <Text style={styles.hintStyle}>
               <ContentText text={hintText} style={styles.hintStyle} />
             )}
-            {/* <Text style={styles.textStyle}>Attempts left: {attempts}</Text> */}
             <ContentText text={"Attempts left: " + attempts} />
-            {/* <Text style={styles.textStyle}>Timer: {timer}s</Text> */}
             <ContentText text={"Timer: " + timer} />
 
             <MyButton
@@ -124,9 +118,7 @@ export default function GameScreen({ startGame }) {
         )}
         {gameState === "success" && (
           <Card style={styles.card}>
-            {/* <Text style={styles.textStyle}>You guessed correct!</Text> */}
             <ContentText text={"You guessed correct!"} />
-            {/* <Text style={styles.textStyle}>Attempts used: {4 - attempts}</Text> */}
             <ContentText
               text={"Attempts used: " + (numberAttempts - attempts)}
             />
@@ -141,7 +133,6 @@ export default function GameScreen({ startGame }) {
 
         {gameState === "guessAgain" && (
           <Card style={styles.card}>
-            {/* <Text style={styles.textStyle}>You did not guess correct!</Text> */}
             <ContentText text={"You did not guess correct!"} />
             <MyButton title={"Try Again"} onPress={handleTryAgain} />
             <MyButton title={"End the game"} onPress={handleEndGame} />
@@ -149,21 +140,14 @@ export default function GameScreen({ startGame }) {
         )}
         {gameState === "gameOver" && (
           <Card style={styles.card}>
-            {/* <Text style={styles.textStyle}>The game is over!</Text> */}
             <ContentText text={"The game is over!"} />
             <Image
               source={require("../assets/crying-face.png")}
               style={styles.imageStyle}
               alt="crying face emoji"
             />
-            {attempts === 0 && (
-              // <Text style={styles.textStyle}>You are out of attempts</Text>
-              <ContentText text={"You are out of attempts"} />
-            )}
-            {timer === 0 && (
-              // <Text style={styles.textStyle}>You are out of time</Text>
-              <ContentText text={"You are out of time"} />
-            )}
+            {attempts === 0 && <ContentText text={"You are out of attempts"} />}
+            {timer === 0 && <ContentText text={"You are out of time"} />}
             <MyButton title={"New Game"} onPress={handleNewGame} />
           </Card>
         )}
@@ -180,21 +164,15 @@ const styles = StyleSheet.create({
   },
 
   card: {
-    // flexGrow: 0,
-    // flexShrink: 1,
-    // alignSelf: "center",
     width: "80%",
     minHeight: "10%",
-    // maxHeight: "50%",
     alignItems: "center",
   },
   buttonContainer: {
     width: "80%",
     alignItems: "flex-end",
-    // padding: 10,
     marginBottom: 10,
   },
-
   hintStyle: {
     color: colors.blue,
   },

@@ -1,14 +1,8 @@
-import { StyleSheet, Text, View, TextInput } from "react-native";
+import { StyleSheet, TextInput } from "react-native";
 import React from "react";
 import colors from "../colors";
 
-export default function Input({
-  value,
-  onChangeText,
-  inputStyle,
-  keyboardType,
-  onBlur,
-}) {
+export default function Input({ value, onChangeText, inputStyle, onBlur }) {
   return (
     <TextInput
       value={value}

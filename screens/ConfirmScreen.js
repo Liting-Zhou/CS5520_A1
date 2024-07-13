@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, Modal, Button } from "react-native";
-import React, { useState } from "react";
+import { StyleSheet, View, Modal, Button } from "react-native";
+import React from "react";
 import colors from "../colors";
 import Card from "../components/Card";
 import MyButton from "../components/MyButton";
@@ -43,7 +43,7 @@ export default function ConfirmScreen({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: "rgba(0, 0, 0, 0.5)", // this screen use different background from the other screens
     alignItems: "center",
     justifyContent: "center",
   },

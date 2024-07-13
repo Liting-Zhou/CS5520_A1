@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Platform } from "react-native";
+import { StyleSheet, View, Platform } from "react-native";
 import React from "react";
 import colors from "../colors";
 

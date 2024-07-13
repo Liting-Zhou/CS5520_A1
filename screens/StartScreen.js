@@ -2,8 +2,6 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
-  Button,
   ScrollView,
   TouchableWithoutFeedback,
   Keyboard,
@@ -30,7 +28,6 @@ export default function StartScreen({
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
 
   const validateName = () => {
-    console.log("validateName: ", userName);
     if (!userName || userName.length <= 1) {
       setErrorMessageName("Name must be more than 1 character");
       return false;
@@ -79,7 +76,6 @@ export default function StartScreen({
         <Card style={styles.card}>
           <ScrollView contentContainerStyle={styles.scrollView}>
             <View style={styles.topContainer}>
-              {/* <Text>Name</Text> */}
               <ContentText text={"Name"} style={styles.nameTextStyle} />
               <Input
                 value={userName}
@@ -87,8 +83,6 @@ export default function StartScreen({
                 onBlur={validateName}
               />
               {errorMessageName && <ErrorMessage message={errorMessageName} />}
-
-              {/* <Text style={styles.textStyle}>Email address</Text> */}
               <ContentText
                 text={"Email address"}
                 style={styles.emailTextStyle}
@@ -99,7 +93,6 @@ export default function StartScreen({
                 onBlur={validateEmail}
               />
               {errorMessageEmail && (
-                // <Text style={styles.errorMessage}>{errorMessageEmail}</Text>
                 <ErrorMessage message={errorMessageEmail} />
               )}
             </View>
@@ -108,7 +101,6 @@ export default function StartScreen({
                 value={toggleCheckBox}
                 onValueChange={setToggleCheckBox}
               />
-              {/* <Text style={styles.textStyleRobot}>I am not a robot</Text> */}
               <ContentText
                 text={"I am not a robot"}
                 style={styles.textStyleRobot}
@@ -145,7 +137,6 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flexGrow: 1,
-    // justifyContent: "space-between",
   },
   welcomeStyle: {
     fontSize: 20,
